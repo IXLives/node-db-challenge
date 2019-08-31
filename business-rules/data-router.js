@@ -7,6 +7,13 @@ const router = express.Router()
 router.get('/projects', (req, res) => {
     BRules.getProjects()
         .then(project => {
+            project.forEach(project => {
+                if (project.completed == 1) {
+                    project.completed = 'true'
+                } else {
+                    project.completed = 'false'
+                }
+            })
             res.status(201).json(project)
         })
         .catch(err => {
@@ -19,6 +26,13 @@ router.get('/projects', (req, res) => {
 router.get('/tasks', (req, res) => {
     BRules.getTasks()
         .then(task => {
+            task.forEach(task => {
+                if (task.completed == 1) {
+                    task.completed = 'true'
+                } else {
+                    task.completed = 'false'
+                }
+            })
             res.status(201).json(task)
         })
         .catch(err => {
