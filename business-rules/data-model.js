@@ -15,7 +15,7 @@ function getProjects() {
 
 function getTasks() {
     return db('tasks as t')
-        .join('projects as p')
+        .join('projects as p', 't.id', 'p.id')
         .select('t.task_description', 't.task_notes', 't.completed', 'p.project_name', 'p.project_description')
 }
 
@@ -24,13 +24,13 @@ function getResources() {
 }
 
 function addProject(project) {
-    db('projects').insert(project)
+    return db('projects').insert(project)
 }
 
 function addTask(task) {
-    db('tasks').insert(task)
+    return db('tasks').insert(task)
 }
 
 function addResource(resource) {
-    db('resources').insert(resource)
+    return db('resources').insert(resource)
 }

@@ -54,12 +54,40 @@ router.get('/resources', (req, res) => {
         })
 })
 
-// function booleanConverter(project) {
-//    if (project.completed == 1) {
-//         return "true"
-//    } else {
-//         return "false"
-//    }
-// }
+router.post('/projects', (req, res) => {
+    BRules.addProject(req.body)
+        .then(project => {
+            res.status(201).json(project)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Error adding project: ", err
+            })
+        })
+})
+
+router.post('/tasks', (req, res) => {
+    BRules.addTask(req.body)
+        .then(task => {
+            res.status(201).json(task)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Error adding task: ", err
+            })
+        })
+})
+
+router.post('/resources', (req, res) => {
+    BRules.addResource(req.body)
+        .then(resource => {
+            res.status(201).json(resource)
+        })
+        .catch(err => {
+            res.status(500).json({
+                message: "Error adding resource: ", err
+            })
+        })
+})
 
 module.exports = router
